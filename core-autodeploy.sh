@@ -182,8 +182,8 @@ mysql_compat_rpm="MySQL-shared-compat-$mysql_v.linux2.6.x86_64.rpm"
 epel_rpm_url=http://dl.fedoraproject.org/pub/epel/$elv/$arch
 
 echo "Installing EPEL Repo"
-wget -r -l1 --no-parent -A 'epel*.rpm' $epel_rpm_url
-try yum -y --nogpgcheck localinstall */pub/epel/$elv/$arch/epel-*.rpm
+wget -r -l1 --no-parent -A 'epel-release*.rpm' $epel_rpm_url
+try yum -y --nogpgcheck localinstall */pub/epel/$elv/$arch/epel-release*.rpm
 disable_repo epel
 
 echo "Installing RabbitMQ"
@@ -234,7 +234,7 @@ enable_service mysql
 # set up rrdtool, etc.
 
 echo "Enabling rpmforge repo..."
-try wget http://apt.sw.be/redhat/$els/en/$arch/rpmforge/RPMS/rpmforge-release-0.5.3-1.$els.rf.$arch.rpm
+try wget http://repository.it4i.cz/mirrors/repoforge/redhat/$els/en/$arch/rpmforge/RPMS/rpmforge-release-0.5.3-1.$els.rf.$arch.rpm
 try yum --nogpgcheck -y localinstall rpmforge-release-0.5.3-1.$els.rf.$arch.rpm
 disable_repo rpmforge
 	
