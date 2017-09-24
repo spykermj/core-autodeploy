@@ -41,6 +41,10 @@ if [ -L /opt/zenoss ]; then
 	exit 1
 fi
 
+for mysql_rpm in `rpm -qa | egrep -i "^mysql-"``; do
+    rpm -e --nodeps "${mysql_rpm}"
+done
+
 if [ `rpm -qa | egrep -c -i "^mysql-"` -gt 0 ]; then
 cat << EOF
 
