@@ -41,9 +41,7 @@ if [ -L /opt/zenoss ]; then
 	exit 1
 fi
 
-for mysql_rpm in `rpm -qa | egrep -i "^mysql-"``; do
-    rpm -e --nodeps "${mysql_rpm}"
-done
+rpm -qa | egrep -i "^mysql-" | xargs rpm -e --nodeps
 
 if [ `rpm -qa | egrep -c -i "^mysql-"` -gt 0 ]; then
 cat << EOF
@@ -145,7 +143,7 @@ zenoss_base_url="http://downloads.sourceforge.net/project/zenoss/zenoss-4.2/zeno
 zenoss_rpm_file="zenoss_core-$build.$els.$arch.rpm"
 
 # Let's grab Zenoss first...
-
+yum -y install wget
 zenoss_gpg_key="http://wiki.zenoss.org/download/core/gpg/RPM-GPG-KEY-zenoss"
 for url in $zenoss_base_url/$zenoss_rpm_file; do
 	# This will skip download if RPM exists in temp dir, or if user has pre-downloaded the RPM
